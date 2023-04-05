@@ -5,6 +5,7 @@ import "./Cart.css";
 import Swal from "sweetalert2";
 import FormCheckout from "../FormCheckout/FormCheckout";
 import { Link } from "react-router-dom";
+
 const Cart = () => {
   const { cart, clearCart, getTotalPrice, deleteProductById } =
     useContext(CartContext);
@@ -17,14 +18,14 @@ const Cart = () => {
       title: "Seguro que quieres vaciar el carrito?",
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: "Si, vaciar",
-      denyButtonText: `No, no vaciar`,
+      confirmButtonText: "Vaciar",
+      denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
         clearCart();
         Swal.fire("Carrito vaciado exitosamente", "", "success");
       } else if (result.isDenied) {
-        Swal.fire("El carrito queda como estaba", "", "info");
+        Swal.fire("Sin cambios", "", "info");
       }
     });
   };
@@ -57,7 +58,7 @@ const Cart = () => {
                       variant="contained"
                       onClick={() => deleteProductById(item.id)}
                     >
-                      Elimiar
+                      Eliminar
                     </Button>
                   </div>
                 </div>

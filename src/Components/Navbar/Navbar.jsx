@@ -3,56 +3,34 @@ import styles from "./Navbar.module.css";
 import CartWidget from "../CartWidget/CartWidget";
 
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
 
 const Navbar = ({ children }) => {
-  const [categoryList, setCategoryList] = useState([]);
-  const [cate, setCate] = useState([]);
-
-  useEffect(() => {
-    const itemsCollection = collection(db, "categories");
-    getDocs(itemsCollection).then((res) => {
-      let arrayCategories = res.docs.map((category) => {
-        return {
-          ...category.data(),
-          id: category.id,
-        };
-      });
-      setCategoryList(arrayCategories);
-      // ESTO ES NUEVO
-      const firstCat = categoryList.length > 0 && categoryList.find(e => e.title === "Todas")
-      const otherCat = categoryList.length > 0 &&  categoryList.filter(e => e.title !== "Todas")
-      if(categoryList.length > 0){
-        setCate([firstCat, ...otherCat])
-      }
-    });
-
-  
-  }, [categoryList]);
 
   return (
     <div>
       <div className={styles.containerNavbar}>
-        <Link to="/" style={{ color: "#e1d4c7", textDecoration: "none" }}>
-          Comision: 51600
+              <Link to ="/">
+       <img className={styles.navbarLogo} src="https://res.cloudinary.com/djwfnuabs/image/upload/v1677175484/LogoPlantasName_white-01_lnkqcr.png" alt="" />
+      </Link>
+
+      <ul className={styles.navbarList}>
+        <Link to="/" className={styles.navbarItem}>
+          Todas
         </Link>
 
-        <ul className={styles.containerList}>
-          {cate?.map((category) => {
-            return (
-              <Link
-                key={category.id}
-                to={category.path}
-                className={styles.navbarItem}
-              >
-                {category.title}
-              </Link>
-            );
-          })}
-        </ul>
+        <Link to="/category/arboles" className={styles.navbarItem}>
+          Arboles
+        </Link>
+
+        <Link to="/category/palmeras" className={styles.navbarItem}>
+          Palmeras
+        </Link>
+
+        <Link to="/category/plantas" className={styles.navbarItem}>
+          Plantas
+        </Link>
+      </ul>
         <CartWidget />
       </div>
       {children}

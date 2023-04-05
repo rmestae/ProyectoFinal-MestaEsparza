@@ -1,4 +1,4 @@
-import { BsFillCartCheckFill } from "react-icons/bs";
+import { FaShoppingCart } from "react-icons/fa";
 import "./CartWidget.css";
 
 import { useContext } from "react"
@@ -15,10 +15,10 @@ const CartWidget = () => {
   return (
     <Link to="/cart">
       <div className="container-cart">
-        <BsFillCartCheckFill
+        <FaShoppingCart
           style={{
             fontSize: "2rem",
-            color: "#e1d4c7",
+            color: "white",
           }}
         />
         <div className="bubble-counter">

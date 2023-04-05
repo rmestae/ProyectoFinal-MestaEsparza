@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import ItemList from "../ItemList/ItemList";
-import PulseLoader from "react-spinners/PulseLoader";
+import GridLoader from "react-spinners/GridLoader";
 
 import { db } from "../../firebaseConfig";
 
@@ -40,9 +40,8 @@ const ItemListContainer = () => {
   if (items.length === 0) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <PulseLoader
-          color={"#7F669D"}
-          // loading={loading}
+        <GridLoader
+          color={"#49856e"}
           size={50}
           aria-label="Loading Spinner"
           data-testid="loader"
@@ -53,16 +52,9 @@ const ItemListContainer = () => {
 
   return (
     <div>
-      {/* {
-        items.length > 0 && <ItemList items={items} />
-      } */}
 
       <ItemList items={items} />
-      {/* <h1 style={{ color: items.length > 0 ? "red" : "blue" }}>
-        Cambio de color
-      </h1> */}
 
-      {/* <input type={ showPassword ? "text" : "password"} /> */}
     </div>
   );
 };
